@@ -49,6 +49,20 @@ exports.updateDiscussion = async (req, res) => {
     }
 };
 
+//alldiscussions
+exports.getAllDiscussion = async (req,res)=>{
+    try {
+        const discussionList = await Discussion.find()
+        if(!discussionList){
+            return res.status(404).json("discussion not found")
+        }
+        res.status(200).json(discussionList)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({message: "Internal Server Error"})
+    }
+}
+
 // Delete discussion
 exports.deleteDiscussion = async (req, res) => {
     try {

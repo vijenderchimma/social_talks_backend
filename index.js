@@ -3,6 +3,9 @@
 const express = require('express');
 const app = express();
 const mongoose = require('./config/mongoose');
+const cors = require('cors')
+
+app.use(cors())
 
 
 // Middleware

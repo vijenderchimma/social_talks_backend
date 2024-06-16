@@ -14,6 +14,10 @@ router.put('/:id', authMiddleware, discussionController.updateDiscussion);
 // DELETE /api/discussions/:id
 router.delete('/:id', authMiddleware, discussionController.deleteDiscussion);
 
+//GET all discussions
+
+router.get('/alldiscussions',authMiddleware,discussionController.getAllDiscussion)
+
 // GET /api/discussions/tags/:tags
 router.get('/tags', authMiddleware, discussionController.getDiscussionsByTags);
 

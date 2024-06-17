@@ -6,14 +6,15 @@ const userController = require('../controllers/userController');
 const authMiddleware = require('../middleware/auth');
 
 // PUT /api/users/:id
-router.put('/:id', authMiddleware, userController.updateUser);
+router.put('/update/:userId', authMiddleware, userController.updateUser);
 
 // DELETE /api/users/:id
-router.delete('/delete/:id', authMiddleware, userController.deleteUser);
+router.delete('/delete/:userId', authMiddleware, userController.deleteUser);
 
 // GET /api/users
 router.get('/', authMiddleware, userController.getUserList);
-
+//GEt user based on id
+router.get('/:userId', authMiddleware, userController.getUser);
 // GET /api/users/search?name=name
 router.get('/search', authMiddleware, userController.searchUser);
 

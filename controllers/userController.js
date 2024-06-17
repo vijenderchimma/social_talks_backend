@@ -7,7 +7,7 @@ exports.updateUser = async (req, res) => {
     const { name, mobileNo, email } = req.body;
 
     try {
-        let user = await User.findById(req.params.id);
+        let user = await User.findById(req.params.userId);
 
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
@@ -19,7 +19,7 @@ exports.updateUser = async (req, res) => {
 
         await user.save();
 
-        res.json(user);
+        res.status(200).json(user);
     } catch (error) {
         console.error(error.message);
         res.status(500).json({ error: 'Server error' });
@@ -29,7 +29,7 @@ exports.updateUser = async (req, res) => {
 // Delete user
 exports.deleteUser = async (req, res) => {
     try {
-    const user = await User.findByIdAndDelete(req.params.id);
+    const user = await User.findByIdAndDelete(req.params.userId);
 
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
@@ -37,7 +37,7 @@ exports.deleteUser = async (req, res) => {
 
         // await user.remove();
 
-        res.json({ message: 'User deleted successfully' });
+        res.status(200).json({ message: 'User deleted successfully' });
     } catch (error) {
         console.error(error.message);
         res.status(500).json({ error: 'Server error' });
@@ -48,12 +48,28 @@ exports.deleteUser = async (req, res) => {
 exports.getUserList = async (req, res) => {
     try {
         const users = await User.find().select('-password');
-        res.json(users);
+        res.status(200).json(users);
     } catch (error) {
         console.error(error.message);
         res.status(500).json({ error: 'Server error' });
     }
 };
+
+exports.getUser = async (req, res) => {
+    const { userId } = req.params;
+    console.log(userId)
+    try {
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+      res.status(200).json(user);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  };
+  
 
 // Search user by name
 exports.searchUser = async (req, res) => {

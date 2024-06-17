@@ -9,8 +9,11 @@ router.post('/discussions/:discussionId/comments', auth, commentController.creat
 // Update a comment
 router.put('/comments/:commentId', auth, commentController.updateComment);
 
+//GET ALl Comments
+router.get('/getallcomments',auth,commentController.getAllComments)
+
 // Delete a comment
-router.delete('/comments/:commentId', auth, commentController.deleteComment);
+router.delete('/delete/:commentId', auth, commentController.deleteComment);
 
 // Like a comment
 router.post('/comments/:commentId/like', auth, commentController.likeComment);

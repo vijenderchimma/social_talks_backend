@@ -60,7 +60,7 @@ exports.login = async (req, res) => {
 
         jwt.sign(payload, process.env.WHATISYOURNAME, { expiresIn: '1h' }, (err, token) => {
             if (err) throw err;
-            res.json({ token,message: "User Login Successfully" });
+            res.status(200).json({ token,userId: user.id,message: "User Login Successfully" });
         });
     } catch (error) {
         console.error(error.message);
